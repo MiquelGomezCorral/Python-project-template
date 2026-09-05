@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Project description"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []  # or dynamic = ["dependencies"] + [tool.setuptools.dynamic] to read from requirements.txt
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
 
 [build-system]
 requires = ["setuptools"]
@@ -13,3 +16,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 where = ["app"]
 include = ["src*", "scripts*"]
+
+[tool.pyright]
+include = ["app"]
+exclude = ["data/**", "logs/**", "models/**"]
+extraPaths = ["app"]
+typeCheckingMode = "off"
